@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Checker - Alrayah Market</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon.ico') }}">
+</head>
+<body>
+    <header>
+        <h1><span class="highlight">Al</span>rayah Market</h1>
+    </header>
+    
+    <div class="container">
+        <h2>🔍 Price Checker</h2>
+        <div class="result" id="result">Waiting for scan...</div>
+    </div>
+
+    <footer>
+        <p>Contact us: <a href="mailto:bodawy.dev@gmail.com">bodawy.dev@gmail.com</a></p>
+        <p>Developed by <strong>Bodawy Dev</strong> | &copy; <span id="year"></span> All Rights Reserved.</p>
+    </footer>
+    
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    
+    <script>
+        function fetchProduct() {
+            fetch("/static/data.json", { cache: "no-store" })  
+            .then(response => response.text()) 
+            .then(text => {
+                if (text.trim() === "") {  
+                    document.getElementById("result").innerHTML = `<span style="color:yellow;">⌛ Waiting for scan...</span>`;
+                } else {
+                    let data = JSON.parse(text);  
+                    if (data.error) {
+                        document.getElementById("result").innerHTML = `<span style="color:red;">❌ Product not found</span>`;
+                    } else {
+                        document.getElementById("result").innerHTML = `
+                            ✅ <strong>Barcode:</strong> ${data.barcode} <br>
+                            📌 <strong>Name:</strong> <span class="arabic-text">${data.item_name}</span> <br> 
+                            <span class="price-display">
+                                ${data.previous_price > data.price ? `<span class="previous-price">💰 <del>${data.previous_price} L.E</del></span>` : ``}
+                                <span class="discount-price"> <strong>${data.price} L.E</strong></span>
+                            </span> <br>
+                            📦 <strong>Inventory:</strong> ${data.inventory}
+                        `;
+                    }
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+
+        setInterval(fetchProduct, 1000);
+    </script>
+</body>
+</html>

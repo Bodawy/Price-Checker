@@ -1,0 +1,8 @@
+Flask
+sqlite3
+subprocess
+json
+threading
+logging
+keyboard
+requests

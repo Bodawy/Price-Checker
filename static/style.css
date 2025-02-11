@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #9a1e1e, #9a1e1e);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.arabic-text {
+    font-family: 'Cairo', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9a1e1e;
+    padding: 20px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+header h1 {
+    color: white;
+    font-size: 40px;
+    white-space: nowrap;
+    animation: moveText 7s linear infinite;
+}
+
+@keyframes moveText {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* Highlight first two letters in a red box */
+.highlight {
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    position: relative;
+    left: -2px;
+}
+
+/* Container styling */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* Result box styling */
+.result {
+    font-size: 24px;
+    padding: 25px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Pulsing light effect when a product is scanned */
+.updated {
+    position: relative;
+    animation: pulseEffect 10s ease-in-out forwards;
+}
+
+@keyframes pulseEffect {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(255, 255, 0, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 0 rgba(255, 255, 0, 0);
+    }
+}
+
+.previous-price {
+    font-size: 20px;
+    color: #ffcc00;
+    font-weight: bold;
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+
+.discount-price {
+    font-size: 26px;
+    color: #00ff00;
+    font-weight: bold;
+}
+
+/* Footer styling */
+footer {
+    background-color: #9a1e1e;
+    color: #fff;
+    font-size: 14px;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    margin-top: auto;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Email & Developer link styling */
+footer a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
